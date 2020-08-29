@@ -12,6 +12,7 @@ import { Header, Icon, Card, Button } from 'react-native-elements';
 import styles from './styles';
 import config from 'app/config/styles';
 import Apple from 'app/assets/images/Apple.png';
+import paymentImage from 'app/assets/images/payment.png';
 
 class PaymentAdd extends Component {
   constructor(props) {
@@ -57,20 +58,25 @@ class PaymentAdd extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           containerStyle={styles.headerContainer}
-          leftComponent={<Icon type="antdesign" name="left" color="white" />}
-          rightComponent={
+          leftComponent={
             <Icon
-              type="font-awesome"
-              style={{ transform: [{ rotate: '90deg' }] }}
-              name="sliders"
+              type="antdesign"
+              name="left"
               color="white"
+              onPress={() => this.props.navigation.goBack()}
             />
           }
           centerComponent={<Text style={styles.headerTitle}>Payment</Text>}
         />
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View style={styles.container}>
-            <View style={{ flex: 3 }} />
+            <View style={{ flex: 3 }}>
+              <Image
+                source={paymentImage}
+                resizeMode="cover"
+                style={{ alignSelf: 'center' }}
+              />
+            </View>
             <View style={{ flex: 0.1 }}>
               <Card containerStyle={styles.card}>
                 <Text style={styles.paymentText}>Payment Methd</Text>

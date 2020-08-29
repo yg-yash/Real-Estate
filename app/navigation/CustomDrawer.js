@@ -89,6 +89,45 @@ const CustomDrawerContent = props => {
               <Text style={styles.itemLabel}>Share App</Text>
             </TouchableOpacity>
           </View>
+          <View style={[styles.itemContainer]}>
+            <TouchableOpacity
+              style={styles.itemTouchable}
+              onPress={() => props.navigation.navigate('Payment Add')}>
+              <Icon
+                type="font-awesome"
+                name="share-alt"
+                size={17}
+                color="white"
+              />
+              <Text style={styles.itemLabel}>Payment Add</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.itemContainer]}>
+            <TouchableOpacity
+              style={styles.itemTouchable}
+              onPress={() => props.navigation.navigate('Payment Details')}>
+              <Icon
+                type="font-awesome"
+                name="share-alt"
+                size={17}
+                color="white"
+              />
+              <Text style={styles.itemLabel}>Payment Details</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.itemContainer]}>
+            <TouchableOpacity
+              style={styles.itemTouchable}
+              onPress={() => props.navigation.navigate('Seller Homepage')}>
+              <Icon
+                type="font-awesome"
+                name="share-alt"
+                size={17}
+                color="white"
+              />
+              <Text style={styles.itemLabel}>Seller Homepage</Text>
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               borderBottomWidth: 0.3,

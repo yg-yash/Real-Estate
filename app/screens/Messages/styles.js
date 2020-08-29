@@ -15,7 +15,6 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
   },
   container: {
-    backgroundColor: 'white',
     flex: 1,
     padding: 5,
   },

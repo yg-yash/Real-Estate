@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import config from 'app/config/styles';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function MyTabBar({ state, descriptors, navigation }) {
@@ -60,69 +60,100 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                 alignItems: 'center',
               }}>
               {label === 'Home' && (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center', right: -7 }}>
                   <Icon
                     type="feather"
                     name="home"
                     size={20}
-                    color={isFocused ? '#651fff' : '#D3D3D3'}
+                    color={
+                      isFocused ? config.color.COLOR_PRIMARY_ICON : '#D3D3D3'
+                    }
                   />
                   <Text
                     style={{
                       fontSize: 10,
-                      color: isFocused ? '#651fff' : '#D3D3D3',
+                      color: isFocused
+                        ? config.color.COLOR_PRIMARY_ICON
+                        : '#D3D3D3',
                     }}>
                     Home
                   </Text>
                 </View>
               )}
-              {label === 'Bookmarks' && (
-                <View style={{ alignItems: 'center' }}>
+              {label === 'Appointments' && (
+                <View style={{ alignItems: 'center', right: -15 }}>
                   <MaterialCommunityIcons
-                    name="bookmark-outline"
-                    size={22}
-                    color={isFocused ? '#651fff' : '#D3D3D3'}
+                    name="clock-fast"
+                    size={23}
+                    color={
+                      isFocused ? config.color.COLOR_PRIMARY_ICON : '#D3D3D3'
+                    }
                   />
                   <Text
                     style={{
                       fontSize: 10,
-                      color: isFocused ? '#651fff' : '#D3D3D3',
+                      color: isFocused
+                        ? config.color.COLOR_PRIMARY_ICON
+                        : '#D3D3D3',
                     }}>
-                    Bookmarks
+                    Appointments
                   </Text>
                 </View>
               )}
+              {label === 'Add' && (
+                <Icon
+                  containerStyle={{
+                    position: 'absolute',
+                    bottom: -5,
+                    borderRadius: 68,
+                    backgroundColor: 'white',
+                  }}
+                  type="ionicons"
+                  name="add-circle"
+                  size={55}
+                  color={config.color.COLOR_PRIMARY_ICON}
+                />
+              )}
+
               {label === 'Messages' && (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center', left: -15 }}>
                   <Icon
                     type="antdesign"
                     name="message1"
                     size={20}
-                    color={isFocused ? '#651fff' : '#D3D3D3'}
+                    color={
+                      isFocused ? config.color.COLOR_PRIMARY_ICON : '#D3D3D3'
+                    }
                   />
                   <Text
                     style={{
                       fontSize: 10,
-                      color: isFocused ? '#651fff' : '#D3D3D3',
+                      color: isFocused
+                        ? config.color.COLOR_PRIMARY_ICON
+                        : '#D3D3D3',
                     }}>
                     Messages
                   </Text>
                 </View>
               )}
               {label === 'Settings' && (
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center', left: -7 }}>
                   <Icon
-                    type="antdesign"
-                    name="setting"
+                    type="font-awesome"
+                    name="user-o"
                     size={20}
-                    color={isFocused ? '#651fff' : '#D3D3D3'}
+                    color={
+                      isFocused ? config.color.COLOR_PRIMARY_ICON : '#D3D3D3'
+                    }
                   />
                   <Text
                     style={{
                       fontSize: 10,
-                      color: isFocused ? '#651fff' : '#D3D3D3',
+                      color: isFocused
+                        ? config.color.COLOR_PRIMARY_ICON
+                        : '#D3D3D3',
                     }}>
-                    Settings
+                    Account
                   </Text>
                 </View>
               )}

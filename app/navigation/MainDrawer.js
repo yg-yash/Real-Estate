@@ -5,9 +5,6 @@ import CustomDrawerContent from './CustomDrawer';
 import Filter from 'app/screens/Filter';
 import PaymentAdd from 'app/screens/PaymentAdd';
 import PaymentDetails from 'app/screens/PaymentDetails';
-import UploadProprty from 'app/screens/UploadProperty';
-import Messages from 'app/screens/Messages';
-import Appointments from 'app/screens/Appointments';
 import SellerHomePage from 'app/screens/SellerHomePage';
 
 const Drawer = createDrawerNavigator();
@@ -20,7 +17,8 @@ const MainDrawer = () => {
       <Drawer.Screen name="Home" component={HomeTabs} />
       <Drawer.Screen name="Filter" component={Filter} />
       <Drawer.Screen name="Payment Add" component={PaymentAdd} />
-      <Drawer.Screen name="Upload Property" component={UploadProprty} />
+      <Drawer.Screen name="Payment Details" component={PaymentDetails} />
+      <Drawer.Screen name="Seller Homepage" component={SellerHomePage} />
     </Drawer.Navigator>
   );
 };

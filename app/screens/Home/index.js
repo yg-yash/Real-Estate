@@ -67,8 +67,7 @@ const Home = ({ navigation }) => {
           <Icon type="feather" name="menu" size={30} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Logo Here</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Upload Property')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
           <Icon
             type="font-awesome"
             style={{ transform: [{ rotate: '90deg' }] }}
