@@ -9,7 +9,7 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import { Header, Icon, Card, Slider, Button } from 'react-native-elements';
+import { Header, Icon, Card, Button } from 'react-native-elements';
 import styles from './styles';
 import config from 'app/config/styles';
 import whitehouse from 'app/assets/images/whitehouse.png';
@@ -21,6 +21,28 @@ class Filter extends Component {
       cityList: ['Toronto'],
       selectedCity: 'Toronto',
       roomsList: [1, 2, 3, 4, 5],
+      bathsList: [1, 2, 3, 4, 5],
+      propertyTypes: [
+        {
+          name: 'Townhouse',
+          icon: 'home',
+        },
+        {
+          name: 'Condo',
+          icon: 'building-o',
+        },
+        {
+          name: 'Apartment',
+          icon: 'building-o',
+        },
+        {
+          name: 'House',
+          icon: 'building-o',
+        },
+      ],
+      selectedProperty: 'Townhouse',
+      selectedRoom: 1,
+      selectedBaths: 1,
     };
   }
   renderCities = item => (
@@ -32,25 +54,52 @@ class Filter extends Component {
     </Card>
   );
   renderRooms = item =>
-    item === 1 ? (
-      <Card containerStyle={styles.roomItem}>
+    item === this.state.selectedRoom ? (
+      <Card containerStyle={styles.roomItem} key={item}>
         <View style={styles.row}>
           <Text style={styles.itemText}>{item}</Text>
           <Icon type="antdesign" name="plus" color="white" size={15} />
         </View>
       </Card>
     ) : (
-      <Card containerStyle={styles.roomItemUnselected}>
+      <TouchableWithoutFeedback
+        onPress={() => this.setState({ selectedRoom: item })}>
+        <Card containerStyle={styles.roomItemUnselected} key={item}>
+          <View style={styles.row}>
+            <Text style={styles.itemunselectedText}>{item}</Text>
+            <Icon
+              type="antdesign"
+              name="plus"
+              color={config.color.COLOR_PRIMARY_ICON}
+              size={10}
+            />
+          </View>
+        </Card>
+      </TouchableWithoutFeedback>
+    );
+  renderBaths = item =>
+    item === this.state.selectedBaths ? (
+      <Card containerStyle={styles.roomItem} key={item}>
         <View style={styles.row}>
-          <Text style={styles.itemunselectedText}>{item}</Text>
-          <Icon
-            type="antdesign"
-            name="plus"
-            color={config.color.COLOR_PRIMARY_ICON}
-            size={10}
-          />
+          <Text style={styles.itemText}>{item}</Text>
+          <Icon type="antdesign" name="plus" color="white" size={15} />
         </View>
       </Card>
+    ) : (
+      <TouchableWithoutFeedback
+        onPress={() => this.setState({ selectedBaths: item })}>
+        <Card containerStyle={styles.roomItemUnselected} key={item}>
+          <View style={styles.row}>
+            <Text style={styles.itemunselectedText}>{item}</Text>
+            <Icon
+              type="antdesign"
+              name="plus"
+              color={config.color.COLOR_PRIMARY_ICON}
+              size={10}
+            />
+          </View>
+        </Card>
+      </TouchableWithoutFeedback>
     );
 
   render() {
@@ -120,58 +169,59 @@ class Filter extends Component {
 
             <View>
               <Text style={styles.headingText}>Property Type</Text>
-              <View style={styles.row}>
-                <TouchableWithoutFeedback>
-                  <Card containerStyle={styles.smallCard}>
-                    <View style={styles.row}>
+              <FlatList
+                data={this.state.propertyTypes}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={{ paddingBottom: 10 }}
+                renderItem={({ item, index }) =>
+                  this.state.selectedProperty.toLowerCase() ===
+                  item.name.toLowerCase() ? (
+                    <Card containerStyle={styles.smallCard}>
                       <Icon
-                        name="home"
+                        type="font-awesome"
+                        name={item.icon}
                         color={config.color.COLOR_PRIMARY_ICON}
                       />
-                      <Text style={styles.optionText}>Residential</Text>
-                    </View>
-                  </Card>
-                </TouchableWithoutFeedback>
-                <Card containerStyle={styles.smallCard}>
-                  <View style={styles.row}>
-                    <Icon
-                      type="font-awesome"
-                      name="building-o"
-                      color="#e0e0e0"
-                    />
-                    <Text style={[styles.optionText, { color: '#999999' }]}>
-                      Commercial
-                    </Text>
-                  </View>
-                </Card>
-              </View>
+                      <Text style={styles.optionText}>{item.name}</Text>
+                    </Card>
+                  ) : (
+                    <TouchableWithoutFeedback
+                      onPress={() =>
+                        this.setState({
+                          selectedProperty: item.name,
+                        })
+                      }>
+                      <Card containerStyle={styles.smallCardunselected}>
+                        <Icon
+                          type="font-awesome"
+                          name={item.icon}
+                          color="#999999"
+                        />
+                        <Text style={[styles.optionText, { color: '#999999' }]}>
+                          {item.name}
+                        </Text>
+                      </Card>
+                    </TouchableWithoutFeedback>
+                  )
+                }
+              />
             </View>
             <View>
               <Text style={styles.headingText}>Bedrooms</Text>
               <View style={styles.row}>
-                <FlatList
-                  horizontal
-                  data={this.state.roomsList}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item, index }) =>
-                    this.renderRooms(item, index)
-                  }
-                  contentContainerStyle={{ paddingBottom: 10 }}
-                />
+                {this.state.roomsList.map((item, index) =>
+                  this.renderRooms(item, index),
+                )}
               </View>
             </View>
             <View>
               <Text style={styles.headingText}>Baths</Text>
               <View style={styles.row}>
-                <FlatList
-                  horizontal
-                  data={this.state.roomsList}
-                  keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item, index }) =>
-                    this.renderRooms(item, index)
-                  }
-                  contentContainerStyle={{ paddingBottom: 10 }}
-                />
+                {this.state.bathsList.map((item, index) =>
+                  this.renderBaths(item, index),
+                )}
               </View>
             </View>
 
@@ -192,7 +242,7 @@ class Filter extends Component {
                         type="antdesign"
                         name="plus"
                         size={15}
-                        color="#999999"
+                        color={config.color.COLOR_PRIMARY_ICON}
                       />
                       <Text style={styles.addText}>Add Your City</Text>
                     </View>
@@ -217,7 +267,7 @@ class Filter extends Component {
                         type="antdesign"
                         name="plus"
                         size={15}
-                        color="#999999"
+                        color={config.color.COLOR_PRIMARY_ICON}
                       />
                       <Text style={styles.addText}>Add Neighbourds</Text>
                     </View>

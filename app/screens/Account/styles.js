@@ -197,4 +197,10 @@ export default StyleSheet.create({
     paddingVertical: 5,
     flex: 1,
   },
+  topCard: {
+    backgroundColor: config.color.COLOR_PRIMARY_ICON,
+    height: 100,
+    borderBottomRightRadius: 25,
+    borderBottomLeftRadius: 25,
+  },
 });

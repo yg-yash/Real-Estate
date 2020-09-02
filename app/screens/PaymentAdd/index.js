@@ -79,10 +79,14 @@ class PaymentAdd extends Component {
             </View>
             <View style={{ flex: 0.1 }}>
               <Card containerStyle={styles.card}>
-                <Text style={styles.paymentText}>Payment Methd</Text>
+                <Text style={styles.paymentText}>Payment Method</Text>
                 <View style={styles.row}>
                   <Card containerStyle={styles.paymentCard}>
-                    <Text>Card</Text>
+                    <Icon
+                      type="antdesign"
+                      name="creditcard"
+                      color={config.color.COLOR_PRIMARY_ICON}
+                    />
                   </Card>
                   <Card containerStyle={styles.paymentCard}>
                     <Text style={styles.paypal}>PayPal</Text>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import config from 'app/config/styles';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function MyTabBar({ state, descriptors, navigation }) {
@@ -106,12 +106,18 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                     position: 'absolute',
                     bottom: -5,
                     borderRadius: 68,
-                    backgroundColor: 'white',
+                    width: 55,
+                    height: 55,
+                    borderWidth: 3,
+                    borderColor: 'white',
+                    backgroundColor: config.color.COLOR_PRIMARY_ICON,
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}
-                  type="ionicons"
-                  name="add-circle"
-                  size={55}
-                  color={config.color.COLOR_PRIMARY_ICON}
+                  type="antdesign"
+                  name="plus"
+                  size={25}
+                  color="white"
                 />
               )}
 
@@ -136,7 +142,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                   </Text>
                 </View>
               )}
-              {label === 'Settings' && (
+              {label === 'Account' && (
                 <View style={{ alignItems: 'center', left: -7 }}>
                   <Icon
                     type="font-awesome"

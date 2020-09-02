@@ -68,7 +68,14 @@ class Messages extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           containerStyle={styles.headerContainer}
-          leftComponent={<Icon type="feather" name="menu" color="white" />}
+          leftComponent={
+            <Icon
+              type="feather"
+              name="menu"
+              color="white"
+              onPress={() => this.props.navigation.toggleDrawer()}
+            />
+          }
           rightComponent={
             <Icon
               type="font-awesome"

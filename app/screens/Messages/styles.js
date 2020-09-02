@@ -30,7 +30,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
 
-    elevation: 6,
+    elevation: 3,
     height: 71,
     borderRadius: 10,
     paddingHorizontal: 10,

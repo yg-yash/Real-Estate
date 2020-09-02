@@ -97,7 +97,7 @@ export default StyleSheet.create({
   },
   saveCard: {
     fontSize: 15,
-    color: '#7561ff',
+    color: config.color.COLOR_PRIMARY_ICON,
     fontFamily: config.fonts.FONT_REGULAR,
   },
   btnContainer: {

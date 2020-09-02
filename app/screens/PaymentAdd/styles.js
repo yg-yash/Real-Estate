@@ -60,6 +60,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: config.color.COLOR_PRIMARY_ICON,
+    minWidth: 70,
   },
   paypal: {
     fontSize: 16,
@@ -96,7 +97,7 @@ export default StyleSheet.create({
   },
   saveCard: {
     fontSize: 15,
-    color: '#7561ff',
+    color: config.color.COLOR_PRIMARY_ICON,
     fontFamily: config.fonts.FONT_REGULAR,
   },
   btnContainer: {
