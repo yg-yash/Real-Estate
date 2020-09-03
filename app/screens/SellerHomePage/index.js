@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Header, Icon, Card, Avatar, Button } from 'react-native-elements';
 import styles from './styles';
 import config from 'app/config/styles';
@@ -113,14 +119,24 @@ class Messages extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           containerStyle={styles.headerContainer}
-          leftComponent={<Icon type="feather" name="menu" color="white" />}
-          rightComponent={
+          leftComponent={
             <Icon
-              type="font-awesome"
-              style={{ transform: [{ rotate: '90deg' }] }}
-              name="sliders"
+              type="feather"
+              name="menu"
               color="white"
+              onPress={() => this.props.navigation.openDrawer()}
             />
+          }
+          rightComponent={
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Filter')}>
+              <Icon
+                type="font-awesome"
+                style={{ transform: [{ rotate: '90deg' }] }}
+                name="sliders"
+                color="white"
+              />
+            </TouchableOpacity>
           }
           centerComponent={<Text style={styles.headerTitle}>Logo Here</Text>}
         />

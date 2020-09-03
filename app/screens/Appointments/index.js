@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, SafeAreaView, ScrollView } from 'react-native';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import { Header, Icon, Card, Avatar } from 'react-native-elements';
 import styles from './styles';
 
@@ -77,12 +83,15 @@ class Messages extends Component {
             />
           }
           rightComponent={
-            <Icon
-              type="font-awesome"
-              style={{ transform: [{ rotate: '90deg' }] }}
-              name="sliders"
-              color="white"
-            />
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Filter')}>
+              <Icon
+                type="font-awesome"
+                style={{ transform: [{ rotate: '90deg' }] }}
+                name="sliders"
+                color="white"
+              />
+            </TouchableOpacity>
           }
           centerComponent={<Text style={styles.headerTitle}>Appointments</Text>}
         />

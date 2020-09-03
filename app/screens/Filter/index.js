@@ -75,7 +75,14 @@ class Filter extends Component {
       <SafeAreaView style={{ flex: 1 }}>
         <Header
           containerStyle={styles.headerContainer}
-          leftComponent={<Icon type="antdesign" name="left" color="white" />}
+          leftComponent={
+            <Icon
+              type="antdesign"
+              name="left"
+              color="white"
+              onPress={() => this.props.navigation.goBack()}
+            />
+          }
           rightComponent={
             <Icon
               type="font-awesome"

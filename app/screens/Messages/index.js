@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import {
@@ -93,16 +94,18 @@ class Messages extends Component {
             />
           }
           rightComponent={
-            <Icon
-              type="font-awesome"
-              style={{ transform: [{ rotate: '90deg' }] }}
-              name="sliders"
-              color="white"
-            />
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Filter')}>
+              <Icon
+                type="font-awesome"
+                style={{ transform: [{ rotate: '90deg' }] }}
+                name="sliders"
+                color="white"
+              />
+            </TouchableOpacity>
           }
           centerComponent={<Text style={styles.headerTitle}>Messages</Text>}
         />
-
         <View style={styles.container}>
           <FlatList
             data={this.state.data}
