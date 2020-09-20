@@ -54,6 +54,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
   },
   card: {
+    zIndex: 2,
     flex: 1,
     padding: 0,
     height: '85%',
@@ -104,5 +105,13 @@ export default StyleSheet.create({
     lineHeight: 23,
     color: config.color.COLOR_WHITE,
     fontFamily: config.fonts.FONT_BOLD,
+  },
+  selectIcon: {
+    position: 'absolute',
+    top: '30%',
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: 100,
   },
 });

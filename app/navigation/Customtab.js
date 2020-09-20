@@ -60,7 +60,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                 alignItems: 'center',
               }}>
               {label === 'Home' && (
-                <View style={{ alignItems: 'center', right: -7 }}>
+                <View style={{ alignItems: 'center' }}>
                   <Icon
                     type="feather"
                     name="home"
@@ -81,7 +81,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                 </View>
               )}
               {label === 'Appointments' && (
-                <View style={{ alignItems: 'center', right: -15 }}>
+                <View style={{ alignItems: 'center' }}>
                   <MaterialCommunityIcons
                     name="clock-fast"
                     size={23}
@@ -122,7 +122,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
               )}
 
               {label === 'Messages' && (
-                <View style={{ alignItems: 'center', left: -15 }}>
+                <View style={{ alignItems: 'center' }}>
                   <Icon
                     type="antdesign"
                     name="message1"
@@ -143,7 +143,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
                 </View>
               )}
               {label === 'Account' && (
-                <View style={{ alignItems: 'center', left: -7 }}>
+                <View style={{ alignItems: 'center' }}>
                   <Icon
                     type="font-awesome"
                     name="user-o"

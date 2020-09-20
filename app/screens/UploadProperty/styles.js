@@ -21,8 +21,8 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   headingText: {
-    marginTop: 15,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 10,
     fontSize: 18,
     lineHeight: 23,
     fontFamily: config.fonts.FONT_BOLD,
@@ -243,6 +243,14 @@ export default StyleSheet.create({
     borderColor: config.color.COLOR_PRIMARY_ICON,
     marginLeft: 10,
   },
+  input: {
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: config.color.COLOR_PRIMARY_ICON,
+    fontFamily: config.fonts.FONT_REGULAR,
+  },
   descriptionCard: {
     borderRadius: 10,
     backgroundColor: 'white',
@@ -256,4 +264,20 @@ export default StyleSheet.create({
     color: config.color.COLOR_GREY_LABEL,
     fontFamily: config.fonts.FONT_REGULAR,
   },
+  descriptionInput: {
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: config.color.COLOR_PRIMARY_ICON,
+    fontFamily: config.fonts.FONT_REGULAR,
+  },
+  errorText: {
+    fontSize: 14,
+    lineHeight: 18,
+    color: 'red',
+    fontFamily: config.fonts.FONT_SEMI_BOLD,
+    marginTop: 4,
+  },
+
 });

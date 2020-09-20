@@ -7,10 +7,12 @@ import UploadProperty from 'app/screens/UploadProperty';
 import Account from 'app/screens/Account';
 
 import CustomTab from './Customtab';
-
+import { useSelector } from 'react-redux';
 const Tabs = createBottomTabNavigator();
 
 const MainTabs = () => {
+  const { userType } = useSelector(state => state.userReducer);
+  console.log(userType);
   return (
     <Tabs.Navigator
       tabBar={props => <CustomTab {...props} />}
@@ -21,7 +23,10 @@ const MainTabs = () => {
       }}>
       <Tabs.Screen name="Home" component={Home} />
       <Tabs.Screen name="Appointments" component={Appointments} />
-      <Tabs.Screen name="Add" component={UploadProperty} />
+      {userType === 'Seller' && (
+        <Tabs.Screen name="Add" component={UploadProperty} />
+      )}
+
       <Tabs.Screen name="Messages" component={Messages} />
 
       <Tabs.Screen name="Account" component={Account} />

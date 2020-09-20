@@ -1,44 +1,73 @@
-/* Login Reducer
- * handles login states in the app
- */
 import createReducer from 'app/lib/createReducer';
 import * as types from 'app/actions/types';
 
 const initialState = {
   isLoggedIn: false,
-  id: 0,
-  username: '',
-  password: '',
+  error: '',
+  signupError: '',
 };
 
 export const loginReducer = createReducer(initialState, {
   [types.LOGIN_REQUEST](state, action) {
     return {
       ...state,
-      username: action.username,
-      password: action.password,
+      error: '',
     };
-  },
-  [types.LOGIN_LOADING_ENDED](state) {
-    return { ...state };
   },
   [types.LOGIN_RESPONSE](state, action) {
     return {
       ...state,
-      id: action.response.id,
       isLoggedIn: true,
+      error: '',
     };
   },
-  [types.LOGIN_FAILED](state) {
+  [types.LOGIN_FAILED](state, action) {
     return {
       ...state,
       isLoggedIn: false,
+      error: action.error,
     };
   },
   [types.LOG_OUT](state) {
     return {
       ...state,
       isLoggedIn: false,
+    };
+  },
+  [types.SELLER_SIGN_UP_REQUEST](state) {
+    return {
+      ...state,
+      signupError: '',
+    };
+  },
+  [types.SELLER_SIGN_UP_RESPONSE](state) {
+    return {
+      ...state,
+      signupError: '',
+    };
+  },
+  [types.SELLER_SIGN_UP_FAILED](state, action) {
+    return {
+      ...state,
+      signupError: action.error,
+    };
+  },
+  [types.BUYER_SIGN_UP_REQUEST](state) {
+    return {
+      ...state,
+      signupError: '',
+    };
+  },
+  [types.BUYER_SIGN_UP_RESPONSE](state) {
+    return {
+      ...state,
+      signupError: '',
+    };
+  },
+  [types.BUYER_SIGN_UP_FAILED](state, action) {
+    return {
+      ...state,
+      signupError: action.error,
     };
   },
 });

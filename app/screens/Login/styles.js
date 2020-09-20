@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: 'flex-start',
     paddingTop: 50,
+
+    zIndex: 1,
   },
   logoText: {
     fontSize: 20,
@@ -180,6 +182,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     color: config.color.COLOR_DISABLED,
+  },
+  error: {
+    fontSize: 12,
+    lineHeight: 15,
+    color: 'red',
   },
 });
 

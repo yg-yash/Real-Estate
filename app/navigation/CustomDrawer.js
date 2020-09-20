@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import { Avatar, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { useDispatch } from 'react-redux';
 import config from 'app/config/styles';
 import * as loginActions from 'app/actions/loginActions';
-
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CustomDrawerContent = props => {
+  const dispatch = useDispatch();
   return (
     <DrawerContentScrollView
       {...props}
@@ -151,12 +151,12 @@ const CustomDrawerContent = props => {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.bottomContainer}>
+          <TouchableOpacity
+            onPress={() => dispatch(loginActions.logOut())}
+            style={styles.bottomContainer}>
             <Icon type="antdesign" name="logout" color="white" size={17} />
-            <TouchableOpacity>
-              <Text style={styles.bottomText}>Logout</Text>
-            </TouchableOpacity>
-          </View>
+            <Text style={styles.bottomText}>Logout</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </DrawerContentScrollView>

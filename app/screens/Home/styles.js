@@ -22,7 +22,14 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
   },
-
+  errorText: {
+    fontSize: 15,
+    lineHeight: 18,
+    color: 'red',
+    fontFamily: config.fonts.FONT_SEMI_BOLD,
+    marginLeft: 15,
+    top: -10,
+  },
   pickerLabel: {
     fontSize: 14,
     lineHeight: 16,
@@ -171,6 +178,24 @@ const styles = StyleSheet.create({
     fontFamily: config.fonts.FONT_BOLD,
   },
   smallIconContainer: { flexDirection: 'row', alignItems: 'center' },
+  noFoundView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  noPropertiesYet: {
+    fontSize: 21,
+    lineHeight: 25,
+    color: config.color.COLOR_GREEN_LABEL,
+    fontFamily: config.fonts.FONT_BOLD,
+  },
+  trySearching: {
+    fontSize: 16,
+    lineHeight: 21,
+    color: config.color.COLOR_PRIMARY_ICON,
+    fontFamily: config.fonts.FONT_BOLD,
+    marginTop: 20,
+  },
 });
 
 export default styles;

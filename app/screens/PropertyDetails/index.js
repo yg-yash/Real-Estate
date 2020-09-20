@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   Text,
   View,
@@ -13,40 +13,34 @@ import config from 'app/config/styles';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import purpleBg from 'app/assets/images/details/purpleBg.png';
 import house from 'app/assets/images/details/house.png';
 
-class PropertyDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sheetOpened: false,
-      entries: [
-        {
-          title: 'Title 1',
-        },
-        {
-          title: 'Title 1',
-        },
-        {
-          title: 'Title 1',
-        },
-        {
-          title: 'Title 1',
-        },
-      ],
-      activeSlide: 0,
-    };
-    this.sheetRef = React.createRef();
-  }
+const PropertyDetails = ({ navigation, route }) => {
+  const [sheetOpened, setSheetOpened] = useState(false);
+  const [entries] = useState([
+    {
+      title: 'Title 1',
+    },
+    {
+      title: 'Title 1',
+    },
+    {
+      title: 'Title 1',
+    },
+    {
+      title: 'Title 1',
+    },
+  ]);
 
-  toggleSheetOpened = () =>
-    this.setState(prevState => ({ sheetOpened: !prevState.sheetOpened }));
+  const [activeSlide, setActiveSlide] = useState(0);
+  const sheetRef = useRef();
 
-  renderSheetOpenContent = () => (
+  const toggleSheetOpened = () => setSheetOpened(value => !value);
+
+  const renderSheetOpenContent = () => (
     <View style={{ flex: 0.7 }}>
       <ImageBackground
-        source={house}
+        source={{ uri: route.params.images[0].file }}
         resizeMode="cover"
         style={{ width: '100%', height: '100%' }}>
         <Icon
@@ -58,40 +52,45 @@ class PropertyDetails extends Component {
             top: 20,
             left: 20,
           }}
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
       </ImageBackground>
     </View>
   );
 
-  _renderItem = ({ item, index }) => {
+  const _renderItem = ({ item, index }) => {
     return (
-      <View style={styles.slide}>
-        <Icon
-          type="antdesign"
-          name="left"
-          color="white"
-          containerStyle={{
-            position: 'absolute',
-            top: 20,
-            left: 20,
-          }}
-          onPress={() => this.props.navigation.goBack()}
-        />
-        <View style={styles.outerhighlightCircle}>
-          <View style={styles.outerwhiteCircle}>
-            <View style={styles.outercolorCircle}>
-              <Icon type="font-awesome" name="play" color="white" size={40} />
+      <ImageBackground
+        source={{ uri: item.file }}
+        resizeMode="cover"
+        style={{ width: '100%', height: '100%' }}>
+        <View style={styles.slide}>
+          <Icon
+            type="antdesign"
+            name="left"
+            color="white"
+            containerStyle={{
+              position: 'absolute',
+              top: 20,
+              left: 20,
+            }}
+            onPress={() => navigation.goBack()}
+          />
+          <View style={styles.outerhighlightCircle}>
+            <View style={styles.outerwhiteCircle}>
+              <View style={styles.outercolorCircle}>
+                <Icon type="font-awesome" name="play" color="white" size={40} />
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </ImageBackground>
     );
   };
 
-  renderContent = () => (
+  const renderContent = () => (
     <View style={styles.bottomSheet}>
-      {this.state.sheetOpened ? (
+      {sheetOpened ? (
         <Icon
           type="entypo"
           name="chevron-thin-down"
@@ -107,16 +106,14 @@ class PropertyDetails extends Component {
         />
       )}
       <ScrollView showsVerticalScrollIndicator={false}>
-        {!this.state.sheetOpened ? (
+        {!sheetOpened ? (
           <Text style={styles.dragText}>Drag up to see more details</Text>
         ) : null}
         <Text style={styles.propertyDetailsText}>Property Details</Text>
         <View style={styles.row}>
-          <Text style={styles.propertyNameText}>
-            {this.props.route.params.name}
-          </Text>
+          <Text style={styles.propertyNameText}>{route.params.name}</Text>
           <Text style={styles.propertyPriceText}>
-            {this.props.route.params.price}
+            $ {route.params.property[0].price}
           </Text>
         </View>
         <View>
@@ -128,7 +125,7 @@ class PropertyDetails extends Component {
               color={config.color.COLOR_PRIMARY_ICON}
             />
             <Text style={styles.itemName}>
-              {this.props.route.params.baths} Baths
+              {route.params.property[0].bath} Baths
             </Text>
           </View>
           <View style={styles.iconRow}>
@@ -139,7 +136,7 @@ class PropertyDetails extends Component {
               color={config.color.COLOR_PRIMARY_ICON}
             />
             <Text style={styles.itemName}>
-              {this.props.route.params.beds} Beds
+              {route.params.property[0].beds} Beds
             </Text>
           </View>
           <View style={styles.iconRow}>
@@ -150,26 +147,38 @@ class PropertyDetails extends Component {
               color={config.color.COLOR_PRIMARY_ICON}
             />
             <Text style={styles.itemName}>
-              {this.props.route.params.area} sqft
+              {route.params.property[0].size} sqft
             </Text>
           </View>
         </View>
         <View style={{ marginVertical: 10 }}>
           <View style={styles.detailsItemRow}>
             <Text style={styles.detailsItemBold}>Type:</Text>
-            <Text style={styles.detailsItem}>Att/Row/Townhouse</Text>
+            <Text style={styles.detailsItem}>
+              {route.params.property[0].propertytype.toUpperCase()}
+            </Text>
           </View>
           <View style={styles.detailsItemRow}>
             <Text style={styles.detailsItemBold}>Style:</Text>
-            <Text style={styles.detailsItem}>2 1/2 Storey</Text>
+            <Text style={styles.detailsItem}>
+              {route.params.property[0].storey
+                ? route.params.property[0].storey
+                : 'No Data'}
+            </Text>
           </View>
           <View style={styles.detailsItemRow}>
             <Text style={styles.detailsItemBold}>Size:</Text>
-            <Text style={styles.detailsItem}>No Data</Text>
+            <Text style={styles.detailsItem}>
+              {route.params.property[0].size}
+            </Text>
           </View>
           <View style={styles.detailsItemRow}>
             <Text style={styles.detailsItemBold}>Lot Size:</Text>
-            <Text style={styles.detailsItem}>1.5 x 123 Feet</Text>
+            <Text style={styles.detailsItem}>
+              {route.params.property[0].lotSize
+                ? route.params.property[0].lotSize
+                : 'No Data'}
+            </Text>
           </View>
           <View style={styles.detailsItemRow}>
             <Text style={styles.detailsItemBold}>Age:</Text>
@@ -178,15 +187,7 @@ class PropertyDetails extends Component {
         </View>
         <Text style={styles.propertyDetailsText}>Description</Text>
         <Text style={styles.descriptionDetails}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum
+          {route.params.property[0].description}
         </Text>
         <Button
           title="Book a virtual tour"
@@ -239,11 +240,10 @@ class PropertyDetails extends Component {
       </ScrollView>
     </View>
   );
-  getPagination() {
-    const { entries, activeSlide } = this.state;
+  const getPagination = () => {
     return (
       <Pagination
-        dotsLength={entries.length}
+        dotsLength={route.params.images.length}
         activeDotIndex={activeSlide}
         dotStyle={{
           width: 15,
@@ -261,65 +261,62 @@ class PropertyDetails extends Component {
         inactiveDotScale={1}
       />
     );
-  }
-  render() {
-    return (
-      <SafeAreaView style={{ flex: 1 }}>
-        {this.state.sheetOpened ? (
-          this.renderSheetOpenContent()
-        ) : (
-          <View style={{ flex: 4 }}>
-            <ImageBackground
-              source={house}
-              resizeMode="cover"
-              style={{ width: '100%', height: '100%' }}>
-              <View
-                style={{
-                  flex: 1,
-                  backgroundColor: 'rgba(117, 97, 255, 0.3)',
-                }}>
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Carousel
-                    ref={c => {
-                      this._carousel = c;
-                    }}
-                    data={this.state.entries}
-                    renderItem={this._renderItem}
-                    sliderWidth={Dimensions.get('screen').width}
-                    itemWidth={Dimensions.get('screen').width}
-                    activeDotIndex
-                    onSnapToItem={index =>
-                      this.setState({ activeSlide: index })
-                    }
-                  />
-                  {this.getPagination()}
-                </View>
-              </View>
-            </ImageBackground>
+  };
+
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      {sheetOpened ? (
+        renderSheetOpenContent()
+      ) : (
+        <View style={{ flex: 4 }}>
+          {/* <ImageBackground
+            source={house}
+            resizeMode="cover"
+            style={{ width: '100%', height: '100%' }}> */}
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: 'rgba(117, 97, 255, 0.3)',
+            }}>
+            <View
+              style={{
+                flex: 1,
+              }}>
+              <Carousel
+                // ref={c => {
+                //   this._carousel = c;
+                // }}
+                data={route.params.images}
+                renderItem={_renderItem}
+                sliderWidth={Dimensions.get('screen').width}
+                itemWidth={Dimensions.get('screen').width}
+                activeDotIndex
+                onSnapToItem={index => setActiveSlide(index)}
+              />
+              {getPagination()}
+            </View>
           </View>
-        )}
-        <View style={{ flex: 1 }}>
-          <BottomSheet
-            ref={this.sheetRef}
-            snapPoints={['20%', '70%', '20%']}
-            borderRadius={20}
-            renderContent={this.renderContent}
-            onOpenStart={() => {
-              this.sheetRef.current.snapTo(1);
-              this.toggleSheetOpened();
-            }}
-            onCloseStart={() => {
-              this.sheetRef.current.snapTo(0);
-              this.toggleSheetOpened();
-            }}
-          />
+          {/* </ImageBackground> */}
         </View>
-      </SafeAreaView>
-    );
-  }
-}
+      )}
+      <View style={{ flex: 1 }}>
+        <BottomSheet
+          ref={sheetRef}
+          snapPoints={['20%', '70%', '20%']}
+          borderRadius={20}
+          renderContent={renderContent}
+          onOpenStart={() => {
+            sheetRef.current.snapTo(1);
+            toggleSheetOpened();
+          }}
+          onCloseStart={() => {
+            sheetRef.current.snapTo(0);
+            toggleSheetOpened();
+          }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 export default PropertyDetails;

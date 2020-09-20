@@ -1,10 +1,16 @@
 /**
  *  Redux saga class init
  */
-import { takeEvery, all } from 'redux-saga/effects';
-import * as types from '../actions/types';
-import loginSaga from './loginSaga';
+import { all } from 'redux-saga/effects';
+import { sellerSignup, login, buyerSignup } from './loginSaga';
+import { searchProperty, uploadProperty } from './propertySaga';
 
 export default function* watch() {
-  yield all([takeEvery(types.LOGIN_REQUEST, loginSaga)]);
+  yield all([
+    login(),
+    sellerSignup(),
+    buyerSignup(),
+    searchProperty(),
+    uploadProperty(),
+  ]);
 }
