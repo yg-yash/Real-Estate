@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 6,
     borderWidth: 0,
+    zIndex: 100,
   },
   tabsContainer: {
     flexDirection: 'row',
@@ -67,22 +68,20 @@ const styles = StyleSheet.create({
     color: config.color.COLOR_LABEL,
     fontFamily: config.fonts.FONT_BOLD,
     textTransform: 'uppercase',
-    marginHorizontal: 10,
     paddingBottom: 10,
     borderBottomWidth: 2,
-
     borderColor: config.color.COLOR_LABEL,
+    width: '120%',
   },
   unselectedTab: {
     fontSize: 23,
     letterSpacing: 1,
     lineHeight: 27,
     color: config.color.COLOR_DISABLED,
-
     fontFamily: config.fonts.FONT_BOLD,
     textTransform: 'uppercase',
-    marginHorizontal: 10,
     paddingBottom: 10,
+    width: '120%',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     alignSelf: 'center',
     bottom: '-4%',
-    zIndex: 5,
+
     width: '60%',
     shadowColor: '#000',
     shadowOffset: {
@@ -134,6 +133,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
     elevation: 6,
+    marginBottom: 10,
   },
   btn: {
     height: 50,
