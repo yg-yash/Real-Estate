@@ -22,6 +22,7 @@ export default StyleSheet.create({
   container: {
     flex: 0.3,
     backgroundColor: 'white',
+    zIndex: 100,
   },
   logoContainer: {
     flex: 1,
@@ -52,6 +53,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     top: '-20%',
     paddingHorizontal: 10,
+    zIndex: 110,
   },
   card: {
     zIndex: 2,

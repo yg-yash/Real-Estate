@@ -147,7 +147,9 @@ const UploadProperty = ({ navigation }) => {
         </View>
       </Card>
     ) : (
-      <TouchableWithoutFeedback onPress={() => selectedBaths(item)} key={item}>
+      <TouchableWithoutFeedback
+        onPress={() => setSelectedBaths(item)}
+        key={item}>
         <Card containerStyle={styles.roomItemUnselected}>
           <View style={styles.row}>
             <Text style={styles.itemunselectedText}>{item}</Text>
@@ -175,7 +177,7 @@ const UploadProperty = ({ navigation }) => {
     if (imageRequired() || isrequired()) {
       return;
     }
-    console.log('asd');
+
     dispatch(
       propertyActions.requestPropertyUpload(
         addressOne,

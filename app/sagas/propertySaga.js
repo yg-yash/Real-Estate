@@ -3,6 +3,7 @@ import { put, call, takeEvery } from 'redux-saga/effects';
 import * as propertyActions from 'app/actions/propertyActions';
 import axios from 'axios';
 import * as types from 'app/actions/types';
+import api from '../api/ApiConstants';
 
 function searchPropertyApi(state, city) {
   console.log(state);
@@ -16,7 +17,7 @@ function searchPropertyApi(state, city) {
   }
 
   return axios({
-    url: 'http://3.85.59.80:8000/property/search',
+    url: `${api.BASE_URL}property/search`,
     method: 'GET',
     data: formData,
     headers: {
@@ -41,9 +42,9 @@ function uploadPropertyApi(payload) {
   formData.append('description', payload.description);
   formData.append('propertytype', payload.propertyType);
   formData.append('images', payload.images);
-
+  console.log(formData);
   return axios({
-    url: 'http://3.85.59.80:8000/property/create',
+    url: `${api.BASE_URL}property/create`,
     method: 'POST',
     data: formData,
     headers: {
@@ -66,6 +67,7 @@ function* searchPropertyAsync(action) {
     yield put(propertyActions.disableSearchLoader({}));
   }
 }
+
 function* uploadPropertyAsync(action) {
   try {
     yield put(propertyActions.enablePropertyUploadLoader());
@@ -73,7 +75,7 @@ function* uploadPropertyAsync(action) {
     yield put(propertyActions.onPropertyUploadResponse(response.data));
     yield put(propertyActions.disablePropertyUploadLoader({}));
   } catch (error) {
-    console.log(error);
+    console.log(error, 'asd');
     yield put(propertyActions.propertyUploadFailed('Something went wrong'));
     yield put(propertyActions.disablePropertyUploadLoader({}));
   }

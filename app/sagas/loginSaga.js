@@ -5,6 +5,7 @@ import * as userActions from 'app/actions/userActions';
 import axios from 'axios';
 import * as types from 'app/actions/types';
 import AsyncStorage from '@react-native-community/async-storage';
+import api from '../api/ApiConstants';
 
 function loginUserApi(username, password, is_staff) {
   const formData = new FormData();
@@ -13,7 +14,7 @@ function loginUserApi(username, password, is_staff) {
   formData.append('is_staff', is_staff);
 
   return axios({
-    url: 'http://3.85.59.80:8000/user/login',
+    url: `${api.BASE_URL}${api.LOGIN}`,
     method: 'POST',
     data: formData,
     headers: {
@@ -42,8 +43,9 @@ function sellerSignupUserApi(
   formData.append('phone_number', phonenumber);
 
   return axios({
-    url: 'http://3.85.59.80:8000/user/create',
+    url: 'http://45.79.165.234:8000/user/create',
     method: 'POST',
+
     data: formData,
     headers: {
       Accept: 'application/json',
@@ -66,7 +68,7 @@ function buyerSignupUserApi(
   formData.append('is_staff', is_staff);
   formData.append('middle_name', middlename);
   return axios({
-    url: 'http://3.85.59.80:8000/user/create',
+    url: 'http://45.79.165.234:8000/user/create',
     method: 'POST',
     data: formData,
     headers: {
@@ -84,13 +86,11 @@ function* loginAsync(action) {
       action.password,
       action.is_staff,
     );
-
     yield call(storeToken, response.data.split("'")[3]);
     yield put(userActions.setUserType(action.is_staff));
     yield put(loginActions.onLoginResponse());
     yield put(loginActions.disableLoader({}));
   } catch (error) {
-    console.log(error);
     if (error.response.status === 400) {
       yield put(loginActions.loginFailed('Invalid Credentials'));
       yield put(loginActions.disableLoader({}));
